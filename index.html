@@ -19,7 +19,7 @@
         location: "ws://mp.rebiekong.com:2346",
       },
       list: "http://mp.rebiekong.com/front/pick/getlist",
-      coser: "http://mp.rebiekong.com/front/pick/getlist",
+      coser: "http://mp.rebiekong.com/front/vote/cos_result",
       choujiang: {
         sandeng: 5,
         erdeng: 3,
@@ -35,5 +35,10 @@
 <script src="src/bower_components/damoo/src/damoo.js"></script>
 <script src="src/framework/material-photo-gallery.js"></script>
 <script src="/dist/build.js"></script>
+<script>
+  $(window).on('beforeunload', function() {
+    return "You should keep this page open.";
+  });
+</script>
 </body>
 </html>

@@ -7,7 +7,7 @@
                 <div class="layout flex horizontal center-center container">
                     <div class="layout inline-flex horizontal center">
                         <div class="huojiang-item" v-for="item in items">
-                            <div class="clip-area"></div>
+                            <div class="clip-area" :style="item.style"></div>
                             <div class="num">{{item.count}}</div>
                             <img src="../assets/img/frame1.png">
                             <div class="bg"></div>
@@ -25,6 +25,10 @@ var ret = {};
 
 function genBgImg(items) {
     return items.map(function(v, index) {
+        v.style = {
+            backgroundImage: `url(${v.backgroundImage})`
+        };
+        console.dir(v.style.backgroundImage);
         return v;
     })
 }
