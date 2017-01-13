@@ -34,31 +34,20 @@ export default {
   },
   data () {
     ret.page = "index";
-    ret.items = genBgImg([
-        {
-           backgroundImage: "../assets/img/test.jpg",
-           count: 0
-        },
-        {
-           backgroundImage: "../assets/img/test.jpg",
-           count: 0
-        },
-        {
-           backgroundImage: "../assets/img/test.jpg",
-           count: 0
-        },
-        {
-           backgroundImage: "../assets/img/test.jpg",
-           count: 0
-        },
-        {
-           backgroundImage: "../assets/img/test.jpg",
-           count: 0
-        }
-    ]);
+    ret.items = [];
     return ret;
   },
   ready() {
+    this.getlist();
+  },
+  methods: {
+    getlist() {
+        return fetch(window.globalConfig.coser).then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            ret.items = genBgImg(data);
+        });
+    }
   }
 }
 </script>

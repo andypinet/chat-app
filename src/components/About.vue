@@ -16,9 +16,9 @@
             <img :src='logo.src'>
           </div>
           <button type="button" class="button button-positive chongxinhuoqu"
-                  @click="getList" :disabled="stop"></button>
+                  @click="getlogos" :disabled="stop || stopchou"></button>
           <button type="button" class="button button-positive sort"
-                  @click="animate" :disabled="stop"></button>
+                  @click="sortlogos" :disabled="stop || stopsort"></button>
         </div>
         <div class="jiangchi">
           <div class="jiangchi-item">
@@ -336,15 +336,26 @@ var ret = {};
       ret.yijingchoudaokeys = [];
       ret.stop = false;
       ret.showbig = false;
+      ret.stopchou = false;
+      ret.stopsort = false;
       ret.checkIndex = 0;
       ret.logos = [];
     },
       animate() {
-        jiangpinmanagaer.clear();
-        setTimeout(function() {
-          picHide().then(function () {
-          });
-        }, 0);
+        return new Promise(function(resolve, reject) {
+          jiangpinmanagaer.clear();
+          setTimeout(function() {
+            picHide().then(function () {
+              resolve();
+            });
+          }, 0);
+        });
+      },
+      sortlogos() {
+        ret.stopsort = true;
+        this.animate().then(function() {
+          ret.stopsort = false;
+        })
       },
       check() {
         if (ret.checkIndex == 0) {
@@ -379,7 +390,7 @@ var ret = {};
         ret.stop = true;
         jiangpinmanagaer.start().then(function (iEnd) {
           console.log(`${iEnd + 1} 号得到奖品`);
-          ret.yijingchoudaokeys.push(ret.logos[iEnd].worker_id);
+          ret.yijingchoudaokeys.push(ret.logos[iEnd].name);
           select(ret[data], iEnd).then(function() {
             self.check();
             jiangpinmanagaer.reset();
@@ -397,7 +408,6 @@ var ret = {};
         return ret.stop || ret.sandenglogos.length > ret.sandengnum;
       },
       checkErdengDisable() {
-        console.log(ret.checkIndex);
         if (ret.checkIndex != 1) {
           return true;
         }
@@ -415,12 +425,20 @@ var ret = {};
         }
         return ret.stop || ret.sandenglogos.length > ret.tedengnum;
       },
+      getlogos() {
+        ret.stopchou = true;
+        this.getList().then(function() {
+          setTimeout(function() {
+            ret.stopchou = false;
+          }, 0);
+        });
+      },
       getList() {
-       fetch(window.globalConfig.list).then(function(response) {
+        return fetch(window.globalConfig.list).then(function(response) {
             return response.json();
         }).then(function(data) {
             ret.logos = data.filter(function(v, index) {
-              return ret.yijingchoudaokeys.indexOf(v.worker_id) < 0;
+              return ret.yijingchoudaokeys.indexOf(v.name) < 0;
             });
         });
       }

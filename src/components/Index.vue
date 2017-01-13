@@ -34,13 +34,14 @@ function appendAvatar(id, src) {
 
 window.globalConfig.ws.onmessage = function(e) {
    var message = JSON.parse(e.data);
+   if (message.type == "heart_beat") {
+    return false;
+   }
    if (message.type == 'text') {
      emitMessage(message.content, "#" + message.from);
-     console.dir(message);
      if (!ret.images[message.from]) {
         appendAvatar(message.from, message.user.avatar);
      }
-     console.dir(Object.keys(ret.images).length == new Set(Object.keys(ret.images)).size);
    } else {
      emitSystem(message.content);
    }
@@ -81,7 +82,6 @@ export default {
       $vonicModal.fromComponent('coser_model', Coser)
     },
   ready() {
-    console.dir($vonicModal);
     ret.globalFont = {
       size: 70 / 1440 * window.innerHeight
     }
@@ -96,11 +96,7 @@ export default {
         top: window.innerHeight / 5,
         gutter: gutter
       };
-      document.getElementById("logo").onload = function() {
-         emitMessage("s".repeat(Math.random()*10) + new Date().toLocaleString(), "#logo");
-      }
     }
-    console.dir(window.globalConfig.ws);
   },
   methods: {
     showChouJiang() {
