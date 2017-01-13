@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Vonic Template</title>
+  <link rel="stylesheet" href="./node_modules/vonic/ionic/css/ionic.css">
+  <style>
+    .num {
+      font-family: "幼圆", "PingFang", sans-serif;
+    }
+  </style>
+</head>
+<body font="pingfang">
+<von-app></von-app>
+<script>
+  window.globalConfig = {
+      wsconfig: {
+        location: "ws://mp.rebiekong.com:2346",
+      },
+      list: "http://mp.rebiekong.com/front/pick/getlist",
+      choujiang: {
+        sandeng: 5,
+        erdeng: 3,
+        yideng: 1,
+        tedeng: 1,
+      },
+      messages: []
+  };
+</script>
+<script src="//cdn.bootcss.com/jquery/2.1.0/jquery.js"></script>
+<script src="//cdn.bootcss.com/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="//cdn.bootcss.com/lodash.js/4.17.4/lodash.js"></script>
+<script src="src/bower_components/damoo/src/damoo.js"></script>
+<script src="src/framework/material-photo-gallery.js"></script>
+<script src="/dist/build.js"></script>
+</body>
+</html>
