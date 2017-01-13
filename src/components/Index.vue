@@ -33,7 +33,15 @@ function appendAvatar(id, src) {
 }
 
 window.globalConfig.ws.onmessage = function(e) {
-   var message = JSON.parse(e.data);
+    if (!e.data) {
+      return false;
+    }
+    try {
+      var message = JSON.parse(e.data);
+    } catch(e) {
+      console.dir(message);
+      return false;
+    }
    if (message.type == "heart_beat") {
     return false;
    }
