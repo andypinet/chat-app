@@ -203,7 +203,7 @@ export default {
                         height: 120%;
                         left: 1%;
                         top: 1%;
-                        clip-path: polygon(7% 0, 90% 0, 97% 80%, 0 80%);
+                        clip-path: polygon(7% 0,90% 0,97% 65%,0 65%);
                     }
                 }
                 @if $i == 3 {
@@ -211,7 +211,12 @@ export default {
                     .clip-area {
                         top: 0;
                         width: 101%;
-                        clip-path: polygon(2% 1%, 97% 1%, 89% 100%, 10% 100%);
+                        clip-path: polygon(2% 1%,97% 1%,89% 87%,10% 87%);
+                    }
+                }
+                @if $i == 4 {
+                    .clip-area {
+                        clip-path: polygon(7% 0,90% 0,97% 65%,2% 65%);
                     }
                 }
                 @if $i == 5 {
