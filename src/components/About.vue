@@ -230,8 +230,8 @@ function jiangpin() {
                 // 为了最后一圈减速，再跑一圈
                 iLast--;
                 if(iLast == stop){
-                    clearTimeout(timer);
-                    fn(iEnd);
+                    // clearTimeout(timer);
+                    // fn(iEnd);
                 }
             }
         })();
